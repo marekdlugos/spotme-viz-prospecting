@@ -1,1 +1,1 @@
-# spotme-viz-prospecting
+# SpotMe Visual Prospecting Tool

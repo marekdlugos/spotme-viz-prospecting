@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SpotMe Visual Prospecting Tool</title>
+    <link rel="stylesheet" href="bulma.min.css">
+    <link rel="stylesheet" href="bulma-helpers.min.css">
+    <style>
+        body {
+            font-family: HelveticaNeue;
+        }
+        #capture {
+            position: relative;
+            float: left;
+        }
+        #headcolor {
+            position: absolute;
+            width: 333px;
+            height: 78px;
+            top: 25px;
+            left: 30px;
+            background-color: #0E5A41;
+            z-index: 0;
+        }
+        #iphone {
+            position: relative;
+            z-index: 1;
+        }
+        #session {
+            position: absolute;
+            top: 131px;
+            left: 50px;
+            width: 123px;
+            height: 139px;
+            background-color: #0E5A41;
+            border-radius: 5px;
+            z-index: 2;
+        }
+        #session span {
+            position: relative;
+            top: 5px;
+            margin-left: 10px;
+            font-size: 12px;
+            color: #FFFFFF;
+        }
+        #session h2 {
+            font-family: HelveticaNeue-Bold;
+            font-size: 14px;
+            color: #FFFFFF;
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+        #headline {
+            font-family: HelveticaNeue-Bold;
+            font-size: 16px;
+            color: #000000;
+            position: absolute;
+            z-index: 2;
+            top: 315px;
+            left: 50px;
+        }
+        #logo {
+            position: absolute;
+            z-index: 2;
+            width: 290px;
+            height: 180px;
+            top: 350px;
+            left: 50px;
+            background: url(logo.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position-x: center;
+            background-position-y: center;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+
+            <div class="columns">
+                <div class="column is-one-third">
+                    <div id="capture">
+                        <div id="headcolor"></div>
+                        <img src="base.png" id="iphone" alt="Base">
+                        <div id="session">
+                            <span>2:00PM</span>
+                            <h2>Welcome reception</h2>
+                        </div>
+                        <h1 id="headline">Welcome to the Starbucks Summit!</h1>
+                        <div id="logo"></div>
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">SpotMe Visual Prospecting Tool</h1>
+                    <div class="field">
+                        <label class="label">Post Headline</label>
+                        <div class="control">
+                            <input class="input" id="company" type="text" placeholder="e.g. Starbucks" value="Welcome to the Starbucks Summit!" onKeyup="changeHeadline()">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Company Color (# HEX format)</label>
+                        <div class="control">
+                            <input class="input" type="text" id="color" placeholder="e.g. F25A2A" value="0E5A41" onkeyup="changeColor()">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Company Logo</label>
+                        <div class="file">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="resume" onchange="previewFile()">
+                                <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose a file…
+                                </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="has-margin-top-80">
+                        <button class="button is-primary" id="download">
+                            <span class="icon">
+                                <i class="fas fa-download"></i>
+                            </span>
+                            <span>Download Screenshot</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+            <script src="html2canvas.min.js"></script>
+            <script>
+                function changeHeadline()
+                {
+                    var company = document.getElementById('company');
+                    document.getElementById('headline').innerHTML = company.value;
+                }
+
+                function changeColor()
+                {
+                    var color = document.getElementById('color');
+                    document.getElementById('headcolor').style.background = '#' + color.value;
+                    document.getElementById('session').style.background = '#' + color.value;
+                }
+
+                function previewFile() {
+                    var preview = document.getElementById('logo');
+                    var file = document.querySelector('input[type=file]').files[0];
+                    var reader = new FileReader();
+
+                    reader.onloadend = function () {
+                        preview.style.backgroundImage = 'url(' + reader.result + ')';
+                    }
+
+                    if (file) {
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.style.backgroundImage = "url(logo.png)";
+                    }
+                }
+                previewFile();
+
+                const capture = () => {
+                        html2canvas(document.querySelector("#capture")).then(canvas => {
+                            document.body.appendChild(canvas);
+                        }).then(() => {
+                            var canvas = document.querySelector('canvas');
+                            canvas.style.display = 'none';
+                            var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                            var a = document.createElement("a");
+                            a.setAttribute('download', 'myImage.png');
+                            a.setAttribute('href', image);
+                            a.click();
+                        });
+                    };
+
+                const btn = document.getElementById('download');
+                btn.addEventListener('click', capture)
+
+            </script>
+        </div>
+    </section>
+</body>
+</html>
