@@ -11,6 +11,9 @@
         body {
             font-family: HelveticaNeue;
         }
+        .container {
+            width: 1000px;
+        }
         #capture {
             position: relative;
             float: left;
@@ -82,7 +85,7 @@
         <div class="container">
 
             <div class="columns">
-                <div class="column is-one-third">
+                <div class="column is-one-half">
                     <div id="capture">
                         <div id="headcolor"></div>
                         <img src="base.png" id="iphone" alt="Base">
@@ -94,7 +97,7 @@
                         <div id="logo"></div>
                     </div>
                 </div>
-                <div class="column is-one-third">
+                <div class="column is-one-half">
                     <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">SpotMe Visual Prospecting Tool</h1>
                     <div class="field">
                         <label class="label">Post Headline</label>
@@ -124,6 +127,12 @@
                             </label>
                         </div>
                     </div>
+                    <div class="field">
+                        <label class="label">Or Copy URL Leading to Company Logo</label>
+                        <div class="control">
+                            <input class="input" type="text" id="logourl" placeholder="e.g. https://spotme.com/logo.png" onkeyup="changeLogo()">
+                        </div>
+                    </div>
                     <div class="has-margin-top-80">
                         <button class="button is-primary" id="download">
                             <span class="icon">
@@ -150,6 +159,12 @@
                     document.getElementById('headcolor').style.background = '#' + color.value;
                     document.getElementById('session').style.background = '#' + color.value;
                 }
+
+                function changeLogo() {
+                        var logourl = document.getElementById('logourl');
+                        var logo = document.getElementById('logo');
+                        logo.style.backgroundImage = 'url(' + logourl.value + ')';
+                    }
 
                 function previewFile() {
                     var preview = document.getElementById('logo');
