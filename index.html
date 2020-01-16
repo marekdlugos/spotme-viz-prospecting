@@ -14,6 +14,7 @@
         #capture {
             position: relative;
             float: left;
+            width: 389px;
         }
         #headcolor {
             position: absolute;
@@ -169,7 +170,7 @@
 
                 const capture = () => {
                         var capture = document.querySelector("#capture")
-                        html2canvas(capture, {width: 389, height: 759}).then(canvas => { 
+                        html2canvas(capture).then(canvas => { 
                             document.body.appendChild(canvas);
                         }).then(() => {
                             var canvas = document.querySelector('canvas');
