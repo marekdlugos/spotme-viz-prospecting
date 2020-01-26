@@ -186,7 +186,8 @@
 
                 const capture = () => {
                         var capture = document.querySelector("#capture")
-                        html2canvas(capture, { useCORS: true, allowTaint: true, dpi: 144 }).then(canvas => {
+                        html2canvas(capture, { useCORS: true, allowTaint: true, scale: 2 }).then(canvas => {
+                            document.getElementById('output').innerHTML = "";
                             document.getElementById('output').appendChild(canvas);
                         });
                     };
