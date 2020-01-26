@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SpotMe Visual Prospecting Tool</title>
     <link rel="stylesheet" href="bulma.min.css">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="bulma-helpers.min.css">
     <style>
         body {
@@ -15,6 +16,9 @@
             position: relative;
             float: left;
             width: 389px;
+        }
+        .container{
+            width: 900px;
         }
         #headcolor {
             position: absolute;
@@ -82,7 +86,7 @@
         <div class="container">
 
             <div class="columns">
-                <div class="column is-one-third">
+                <div class="column is-one-half">
                     <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">Preview</h1>
                     <div id="capture">
                         <div id="headcolor"></div>
@@ -95,7 +99,7 @@
                         <div id="logo"></div>
                     </div>
                 </div>
-                <div class="column is-one-third">
+                <div class="column is-one-half">
                     <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">Parameters</h1>
                     <div class="field">
                         <label class="label">Post Headline</label>
@@ -131,23 +135,19 @@
                             <input class="input" type="text" id="logourl" placeholder="e.g. https://spotme.com/logo.png" onkeyup="changeLogo()">
                         </div>
                     </div>
-                    <div class="has-margin-top-80">
+                    <!-- <div class="has-margin-top-80">
                         <button class="button is-primary" id="download">
                             <span class="icon">
                                 <i class="fas fa-sync"></i>
                             </span>
                             <span>Generate Screenshot</span>
                         </button>
-                    </div>
-                </div>
-                <div class="column is-one-third">
-                    <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">Output (Ready to be saved)</h1>
-                    <div id="output"></div>
+                    </div> -->
                 </div>
             </div>
             
             <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-            <script src="html2canvas.min.js"></script>
+            <!-- <script src="html2canvas.min.js"></script> -->
             <script>
                 function changeHeadline()
                 {
@@ -184,23 +184,23 @@
                     }
                 }
 
-                const capture = () => {
-                        var capture = document.querySelector("#capture")
-                        html2canvas(capture, { useCORS: true, allowTaint: true, scale: 2 }).then(canvas => {
-                            document.getElementById('output').innerHTML = "";
-                            document.getElementById('output').appendChild(canvas);
-                        }).then(() => {
-                            var canvas = document.querySelector('canvas');
-                            var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                            var a = document.createElement("a");
-                            a.setAttribute('download', 'spotme-screenshot.png');
-                            a.setAttribute('href', image);
-                            a.click();
-                        });
-                };
+                // const capture = () => {
+                //         var capture = document.querySelector("#capture")
+                //         html2canvas(capture, { useCORS: true, allowTaint: true, scale: 2 }).then(canvas => {
+                //             document.getElementById('output').innerHTML = "";
+                //             document.getElementById('output').appendChild(canvas);
+                //         }).then(() => {
+                //             var canvas = document.querySelector('canvas');
+                //             var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                //             var a = document.createElement("a");
+                //             a.setAttribute('download', 'spotme-screenshot.png');
+                //             a.setAttribute('href', image);
+                //             a.click();
+                //         });
+                // };
 
-                const btn = document.getElementById('download');
-                btn.addEventListener('click', capture)
+                // const btn = document.getElementById('download');
+                // btn.addEventListener('click', capture)
 
             </script>
         </div>
