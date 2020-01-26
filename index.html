@@ -189,8 +189,16 @@
                         html2canvas(capture, { useCORS: true, allowTaint: true, scale: 2 }).then(canvas => {
                             document.getElementById('output').innerHTML = "";
                             document.getElementById('output').appendChild(canvas);
+                        }).then(() => {
+                            var canvas = document.querySelector('canvas');
+                            canvas.style.display = 'none';
+                            var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                            var a = document.createElement("a");
+                            a.setAttribute('download', 'spotme-screenshot.png');
+                            a.setAttribute('href', image);
+                            a.click();
                         });
-                    };
+                };
 
                 const btn = document.getElementById('download');
                 btn.addEventListener('click', capture)
