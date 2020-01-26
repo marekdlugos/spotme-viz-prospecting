@@ -182,58 +182,24 @@
                     }
                 }
 
-                // const capture = () => {
-                //         var capture = document.querySelector("#capture")
-                //         html2canvas(capture, { useCORS: true, allowTaint: true }).then(canvas => { 
-                //             document.body.appendChild(canvas);
-                //         }).then(() => {
-                //             var canvas = document.querySelector('canvas');
-                //             canvas.style.display = 'none';
-                //             var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-                //             var a = document.createElement("a");
-                //             a.setAttribute('download', 'spotme-screenshot.png');
-                //             a.setAttribute('href', image);
-                //             a.click();
-                //         });
-                //     };
-
-                // const btn = document.getElementById('download');
-                // btn.addEventListener('click', capture)
-
-            </script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script>
-                $(function () {
-                        $("#download").click(function () {
-                            html2canvas($("#capture"), {
-                                onrendered: function (canvas) {
-                                    var context = canvas.getContext("2d"); // returns the 2d context object
-                                    var img = new Image() //creates a variable for a new image
-                                    var offsets = document.getElementById('logo').getBoundingClientRect();
-                                    var imgTop = offsets.top;
-                                    var imgLeft = offsets.left;
-
-                                    //Find actual position with parent cotainer
-                                    var offsetsContainer = document.getElementById('capture').getBoundingClientRect();
-                                    imageLeft = parseInt(imgLeft) - parseInt(offsetsContainer.left);
-                                    imageTop = parseInt(imgTop) - parseInt(offsetsContainer.top);
-
-                                    img.src = document.getElementById('myimage').src; // specifies the location of the image
-
-                                    img.onload = function () {
-                                        context.drawImage(img, imageLeft, imageTop);// draws the image at the specified x and y location
-                                    }
-                                    // Convert and download as image 
-                                    theCanvas = canvas;
-                                    document.body.appendChild(canvas);
-
-                                    // Convert and download as image 
-                                    Canvas2Image.saveAsPNG(canvas);
-                                    $("#img-out").append(canvas);
-                                }
-                            });
+                const capture = () => {
+                        var capture = document.querySelector("#capture")
+                        html2canvas(capture, { useCORS: true, allowTaint: true }).then(canvas => { 
+                            document.body.appendChild(canvas);
+                        }).then(() => {
+                            var canvas = document.querySelector('canvas');
+                            canvas.style.display = 'none';
+                            var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                            var a = document.createElement("a");
+                            a.setAttribute('download', 'spotme-screenshot.png');
+                            a.setAttribute('href', image);
+                            a.click();
                         });
-                    });
+                    };
+
+                const btn = document.getElementById('download');
+                btn.addEventListener('click', capture)
+
             </script>
         </div>
     </section>
