@@ -11,9 +11,6 @@
         body {
             font-family: HelveticaNeue;
         }
-        .container {
-            width: 1000px;
-        }
         #capture {
             position: relative;
             float: left;
@@ -85,7 +82,8 @@
         <div class="container">
 
             <div class="columns">
-                <div class="column is-one-half">
+                <div class="column is-one-third">
+                    <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">Preview</h1>
                     <div id="capture">
                         <div id="headcolor"></div>
                         <img src="base.png" id="iphone" alt="Base">
@@ -97,8 +95,8 @@
                         <div id="logo"></div>
                     </div>
                 </div>
-                <div class="column is-one-half">
-                    <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">SpotMe Visual Prospecting Tool</h1>
+                <div class="column is-one-third">
+                    <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">Parameters</h1>
                     <div class="field">
                         <label class="label">Post Headline</label>
                         <div class="control">
@@ -136,11 +134,15 @@
                     <div class="has-margin-top-80">
                         <button class="button is-primary" id="download">
                             <span class="icon">
-                                <i class="fas fa-download"></i>
+                                <i class="fas fa-sync"></i>
                             </span>
-                            <span>Download Screenshot</span>
+                            <span>Generate Screenshot</span>
                         </button>
                     </div>
+                </div>
+                <div class="column is-one-third">
+                    <h1 class="is-size-4 has-text-weight-bold has-margin-bottom-20">Output (Ready to be saved)</h1>
+                    <div id="output"></div>
                 </div>
             </div>
             
@@ -184,11 +186,9 @@
 
                 const capture = () => {
                         var capture = document.querySelector("#capture")
-                        html2canvas(capture, { useCORS: true, allowTaint: true }).then(canvas => { 
-                            document.body.appendChild(canvas);
-                        }).then(() => {
-                            var canvas = document.querySelector('canvas');
-                            canvas.style.display = 'none';
+                        html2canvas(capture, { useCORS: true, allowTaint: true }).then(canvas => {
+                            document.getElementById('output').appendChild(canvas);
+                        }).then(canvas => {
                             var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
                             var a = document.createElement("a");
                             a.setAttribute('download', 'spotme-screenshot.png');
